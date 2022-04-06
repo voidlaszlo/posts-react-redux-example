@@ -6,7 +6,6 @@ import { store } from "./app/store/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { User } from "tabler-icons-react";
 
 ReactDOM.render(
   <React.StrictMode>
