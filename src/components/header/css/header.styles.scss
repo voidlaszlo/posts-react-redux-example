@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-lg);
+
+  button.cta {
+    background-color: var(--color-primary);
+    padding: var(--padding-btn);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--box-shadow-sm);
+    font-weight: bold;
+    color: var(--color-primary-reverse);
+    border: none;
+  }
+}

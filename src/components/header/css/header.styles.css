@@ -1,0 +1,24 @@
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: var(--padding-lg);
+}
+
+header button.cta {
+  background-color: var(--color-primary);
+  padding: var(--padding-btn);
+  border-radius: var(--border-radius-sm);
+  -webkit-box-shadow: var(--box-shadow-sm);
+          box-shadow: var(--box-shadow-sm);
+  font-weight: bold;
+  color: var(--color-primary-reverse);
+  border: none;
+}
+/*# sourceMappingURL=header.styles.css.map */

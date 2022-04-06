@@ -1,0 +1,50 @@
+div.card {
+  div.card-header {
+    display: flex;
+    gap: var(--padding-xs);
+    padding: var(--padding-sm);
+
+    div.user-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      background-color: var(--color-primary);
+      color: var(--color-primary-reverse);
+    }
+  }
+
+  div.card-body {
+    display: grid;
+    gap: var(--padding-sm);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr;
+    grid-template-areas:
+      "user-info user-info"
+      "company address";
+
+    div.box {
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      padding: var(--padding-sm);
+
+      small {
+        font-weight: 700;
+      }
+    }
+
+    div.user-info {
+      grid-area: user-info;
+      display: flex;
+      gap: var(--padding-md);
+    }
+
+    div.address {
+      grid-area: address;
+    }
+
+    div.company {
+      grid-area: company;
+    }
+  }
+}

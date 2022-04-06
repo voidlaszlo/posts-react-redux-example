@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,AAAA,eAAe,CAAC;EACjB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,GAAG,EAAE,iBAAiB;CACvB",
+    "sources": [
+        "postComponent.scss"
+    ],
+    "names": [],
+    "file": "postComponent.css"
+}

@@ -1,56 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import { useGetPostsQuery } from "./app/api/posts/postsApi";
+import { useLoginQuery } from "./app/api/users/usersApi";
+import { useAppDispatch, useAppSelector } from "./app/hooks/hooks";
+import Header from "./components/header/Header";
+import ExtendedPostComponent from "./components/posts/extendedPostComponent/ExtendedPostComponent";
+import PostComponentContainer from "./components/posts/postComponentContainer/PostComponentContainer";
+import UserPage from "./components/users/userPage/UserPage";
+import { setCurrentUser } from "./features/users/currentUserSlice";
+import "./app.css";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const { data: user } = useLoginQuery();
+  const { data: posts } = useGetPostsQuery();
+
+  if (user) {
+    dispatch(setCurrentUser(user));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/profiles/:id" element={<UserPage />} />
+        <Route path="/posts/:id" element={<ExtendedPostComponent />} />
+        <Route
+          path="/"
+          element={
+            posts ? (
+              <PostComponentContainer posts={posts} />
+            ) : (
+              <p>Loading posts...</p>
+            )
+          }
+        />
+      </Routes>
     </div>
   );
 }
