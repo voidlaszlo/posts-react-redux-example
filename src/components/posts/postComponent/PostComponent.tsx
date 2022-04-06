@@ -25,22 +25,17 @@ const PostComponent = ({ children: post }: PostComponentProps) => {
     }
   }, []);
 
-  const navigateToOwnersProfile = () => {
-    return () => {
-      navigate(`../profiles/${owner?.id}`, {
-        replace: false,
-        state: { data: location },
-      });
-    };
+  const navigateToOwnersProfile = () => () => {
+    navigate(`../profiles/${owner?.id}`, {
+      replace: false,
+      state: { data: location },
+    });
   };
-
-  const navigateToExtendedPost = () => {
-    return () => {
-      navigate(`../posts/${post.id}`, {
-        replace: false,
-        state: { data: location },
-      });
-    };
+  const navigateToExtendedPost = () => () => {
+    navigate(`../posts/${post.id}`, {
+      replace: false,
+      state: { data: location },
+    });
   };
 
   return (
