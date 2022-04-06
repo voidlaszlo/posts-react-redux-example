@@ -31,6 +31,7 @@ const PostComponent = ({ children: post }: PostComponentProps) => {
       state: { data: location },
     });
   };
+
   const navigateToExtendedPost = () => () => {
     navigate(`../posts/${post.id}`, {
       replace: false,
