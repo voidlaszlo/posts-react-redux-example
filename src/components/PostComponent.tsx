@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useGetUserByIdQuery } from "../../../app/api/users/usersApi";
-import Post from "../../../models/posts/post.model";
-import { makeFirstLetterUpperCase } from "../utils/utils";
+import { useGetUserByIdQuery } from "../api/users/usersApi";
+import Post from "../models/Post";
+import { makeFirstLetterUpperCase } from "../utils";
 
 interface PostComponentProps {
   children: Post;

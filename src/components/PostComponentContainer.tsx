@@ -1,6 +1,6 @@
-import Post from "../../../models/posts/post.model";
-import "./css/postComponent.css";
-import PostComponent from "../postComponent/PostComponent";
+import Post from "../models/Post";
+import "../css/postComponent.css";
+import PostComponent from "./PostComponent";
 import React from "react";
 
 interface PostComponentContainerProps {

@@ -1,4 +1,4 @@
-import Post from "../../../models/posts/post.model";
+import Post from "../../models/Post";
 import api from "../api";
 
 const postsApi = api.injectEndpoints({

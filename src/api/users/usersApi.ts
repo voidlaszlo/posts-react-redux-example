@@ -1,4 +1,4 @@
-import User from "../../../models/users/user.model";
+import User from "../../models/User";
 import api from "../api";
 
 export const usersApi = api.injectEndpoints({

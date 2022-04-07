@@ -1,4 +1,4 @@
-import { Company } from "../../../models/users/user.model";
+import { Company } from "../models/User";
 
 interface UserCompanyProps {
   company: Company | undefined;

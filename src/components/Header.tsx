@@ -1,6 +1,6 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { navigateBack } from "../utils/utils";
-import "./css/header.styles.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { navigateBack } from "../utils";
+import "../css/header.styles.css";
 
 const Header = () => {
   let location = useLocation();

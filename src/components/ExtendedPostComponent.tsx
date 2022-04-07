@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetCommentsByPostIdQuery } from "../../../app/api/comments/commentsApi";
-import { useGetPostByIdQuery } from "../../../app/api/posts/postsApi";
-import Post from "../../../models/posts/post.model";
-import CommentComponent from "../../comments/CommentComponent";
-import PostComponent from "../postComponent/PostComponent";
+import { useGetCommentsByPostIdQuery } from "../api/comments/commentsApi";
+import { useGetPostByIdQuery } from "../api/posts/postsApi";
+import Post from "../models/Post";
+import CommentComponent from "./CommentComponent";
+import PostComponent from "./PostComponent";
 
 const ExtendedPostComponent = () => {
   let params = useParams();

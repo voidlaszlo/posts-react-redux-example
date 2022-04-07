@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { useGetPostsQuery } from "./app/api/posts/postsApi";
-import { useLoginQuery } from "./app/api/users/usersApi";
-import { useAppDispatch, useAppSelector } from "./app/hooks/hooks";
-import Header from "./components/header/Header";
-import ExtendedPostComponent from "./components/posts/extendedPostComponent/ExtendedPostComponent";
-import PostComponentContainer from "./components/posts/postComponentContainer/PostComponentContainer";
-import UserPage from "./components/users/userPage/UserPage";
-import { setCurrentUser } from "./features/users/currentUserSlice";
+import { useGetPostsQuery } from "./api/posts/postsApi";
+import { useLoginQuery } from "./api/users/usersApi";
+import { useAppDispatch, useAppSelector } from "./hooks/hooks";
+import Header from "./components/Header";
+import ExtendedPostComponent from "./components/ExtendedPostComponent";
+import PostComponentContainer from "./components/PostComponentContainer";
+import UserPage from "./components/UserPage";
+import { setCurrentUser } from "./features/currentUserSlice";
 import "./app.css";
 
 function App() {

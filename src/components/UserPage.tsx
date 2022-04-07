@@ -1,13 +1,11 @@
-import React from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useGetPostsByUserIdQuery } from "../../../app/api/posts/postsApi";
-import { useGetUserByIdQuery } from "../../../app/api/users/usersApi";
-import User from "../../../models/users/user.model";
-import PostComponentContainer from "../../posts/postComponentContainer/PostComponentContainer";
-import UserAddress from "../userAddress/UserAddress";
-import UserCompany from "../userCompany/UserCompany";
-import "./css/userPage.styles.css";
-import { getFirstChars, splitStringAtSpace } from "./utils";
+import { useParams } from "react-router-dom";
+import { useGetPostsByUserIdQuery } from "../api/posts/postsApi";
+import { useGetUserByIdQuery } from "../api/users/usersApi";
+import PostComponentContainer from "./PostComponentContainer";
+import UserAddress from "./UserAddress";
+import UserCompany from "./UserCompany";
+import "../css/userPage.styles.css";
+import { getFirstChars, splitStringAtSpace } from "../utils";
 
 const UserPage = () => {
   let params = useParams();

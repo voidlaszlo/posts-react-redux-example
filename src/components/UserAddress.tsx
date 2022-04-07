@@ -1,4 +1,4 @@
-import { Address } from "../../../models/users/user.model";
+import { Address } from "../models/User";
 
 interface UserAddressProps {
   address: Address | undefined;

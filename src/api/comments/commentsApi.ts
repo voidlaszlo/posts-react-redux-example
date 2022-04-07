@@ -1,4 +1,4 @@
-import Comment from "../../../models/comments/comment.model";
+import Comment from "../../models/Comment";
 import api from "../api";
 
 export const commentsApi = api.injectEndpoints({

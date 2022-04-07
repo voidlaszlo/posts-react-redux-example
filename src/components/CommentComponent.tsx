@@ -1,5 +1,5 @@
-import Comment from "../../models/comments/comment.model";
-import "./css/commentComponent.css";
+import Comment from "../models/Comment";
+import "../css/commentComponent.css";
 
 interface CommentComponentProps {
   comment: Comment;
