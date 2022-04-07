@@ -1,10 +1,10 @@
 import { Company } from "../models/User";
 
-interface UserCompanyProps {
+interface Props {
   company: Company | undefined;
 }
 
-const UserCompany = ({ company }: UserCompanyProps) => {
+const UserCompany = ({ company }: Props) => {
   return (
     <div className="box company">
       <small>Company</small>

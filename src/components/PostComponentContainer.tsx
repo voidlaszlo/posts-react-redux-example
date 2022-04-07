@@ -1,14 +1,13 @@
-import Post from "../models/Post";
 import "../css/postComponent.css";
-import PostComponent from "./PostComponent";
-import React from "react";
+import Post from "../models/Post";
 import ComponentMapper from "./ComponentMapper";
+import PostComponent from "./PostComponent";
 
-interface PostComponentContainerProps {
+interface Props {
   posts: Post[];
 }
 
-const PostComponentContainer = ({ posts }: PostComponentContainerProps) => {
+const PostComponentContainer = ({ posts }: Props) => {
   return (
     <div className="post-container">
       <h3 className="section-title">Posts</h3>

@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useGetPostsByUserIdQuery } from "../api/postsApi";
 import { useGetUserByIdQuery } from "../api/usersApi";
+import "../css/userPage.styles.css";
+import { getFirstChars, splitStringAtSpace } from "../utils";
 import PostComponentContainer from "./PostComponentContainer";
 import UserAddress from "./UserAddress";
 import UserCompany from "./UserCompany";
-import "../css/userPage.styles.css";
-import { getFirstChars, splitStringAtSpace } from "../utils";
 
 const UserPage = () => {
   let params = useParams();

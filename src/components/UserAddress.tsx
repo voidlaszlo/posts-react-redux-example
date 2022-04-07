@@ -1,10 +1,10 @@
 import { Address } from "../models/User";
 
-interface UserAddressProps {
+interface Props {
   address: Address | undefined;
 }
 
-const UserAddress = ({ address }: UserAddressProps) => {
+const UserAddress = ({ address }: Props) => {
   return (
     <div className="box address">
       <small>Address</small>

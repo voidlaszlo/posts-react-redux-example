@@ -1,12 +1,9 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetCommentsByPostIdQuery } from "../api/commentsApi";
 import { useGetPostByIdQuery } from "../api/postsApi";
 import Comment from "../models/Comment";
-import Post from "../models/Post";
 import CommentComponent from "./CommentComponent";
 import ComponentMapper from "./ComponentMapper";
-import FetchErrorComponent from "./FetchErrorComponent";
 import PostComponent from "./PostComponent";
 
 const ExtendedPostComponent = () => {

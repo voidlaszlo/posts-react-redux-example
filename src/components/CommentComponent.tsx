@@ -1,11 +1,11 @@
-import Comment from "../models/Comment";
 import "../css/commentComponent.css";
+import Comment from "../models/Comment";
 
-interface CommentComponentProps {
+interface Props {
   comment?: Comment;
 }
 
-const CommentComponent = ({ comment }: CommentComponentProps) => {
+const CommentComponent = ({ comment }: Props) => {
   return (
     <div className="comment">
       <div className="comment-body">

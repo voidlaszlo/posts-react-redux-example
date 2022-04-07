@@ -4,11 +4,11 @@ import { useGetUserByIdQuery } from "../api/usersApi";
 import Post from "../models/Post";
 import { makeFirstLetterUpperCase } from "../utils";
 
-interface PostComponentProps {
+interface Props {
   post?: Post;
 }
 
-const PostComponent = ({ post }: PostComponentProps) => {
+const PostComponent = ({ post }: Props) => {
   const { data: owner } = useGetUserByIdQuery(post?.userId);
   const [isExtended, setIsExtended] = useState(false);
   const [isProfilePage, setIsProfilePage] = useState(false);

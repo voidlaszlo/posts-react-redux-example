@@ -1,6 +1,9 @@
 import { NavigateFunction } from "react-router-dom";
 import Post from "../models/Post";
 
+export const navigateToStart = (navigate: NavigateFunction) => () =>
+  navigate("../");
+
 export const navigateBack = (navigate: NavigateFunction) => () => {
   navigate(-1);
 };
