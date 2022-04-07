@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { useGetPostsQuery } from "./api/posts/postsApi";
-import { useLoginQuery } from "./api/users/usersApi";
+import { useGetPostsQuery } from "./api/postsApi";
+import { useLoginQuery } from "./api/usersApi";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import Header from "./components/Header";
 import ExtendedPostComponent from "./components/ExtendedPostComponent";

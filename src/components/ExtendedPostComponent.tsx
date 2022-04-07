@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetCommentsByPostIdQuery } from "../api/comments/commentsApi";
-import { useGetPostByIdQuery } from "../api/posts/postsApi";
+import { useGetCommentsByPostIdQuery } from "../api/commentsApi";
+import { useGetPostByIdQuery } from "../api/postsApi";
 import Post from "../models/Post";
 import CommentComponent from "./CommentComponent";
 import PostComponent from "./PostComponent";

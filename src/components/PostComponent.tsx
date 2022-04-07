@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useGetUserByIdQuery } from "../api/users/usersApi";
+import { useGetUserByIdQuery } from "../api/usersApi";
 import Post from "../models/Post";
 import { makeFirstLetterUpperCase } from "../utils";
 

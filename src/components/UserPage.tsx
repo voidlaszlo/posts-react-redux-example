@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useGetPostsByUserIdQuery } from "../api/posts/postsApi";
-import { useGetUserByIdQuery } from "../api/users/usersApi";
+import { useGetPostsByUserIdQuery } from "../api/postsApi";
+import { useGetUserByIdQuery } from "../api/usersApi";
 import PostComponentContainer from "./PostComponentContainer";
 import UserAddress from "./UserAddress";
 import UserCompany from "./UserCompany";
