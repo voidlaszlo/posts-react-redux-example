@@ -25,7 +25,10 @@ export const sliceBy = (number: number, posts: Post[]): Post[] => {
   return posts.slice(number);
 };
 
-export const makeFirstLetterUpperCase = (string: string): string => {
-  const [first, ...rest] = string.split("");
+export const makeFirstLetterUpperCase = (
+  string: string | undefined
+): string | undefined => {
+  if (!string) return undefined;
+  const [first, ...rest] = string?.split("");
   return `${first.toLocaleUpperCase()}${rest.join("")}`;
 };

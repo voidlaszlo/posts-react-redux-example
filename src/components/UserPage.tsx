@@ -10,7 +10,7 @@ import { getFirstChars, splitStringAtSpace } from "../utils";
 const UserPage = () => {
   let params = useParams();
   const { data: user } = useGetUserByIdQuery(Number(params.id));
-  const { data: posts } = useGetPostsByUserIdQuery(user ? user.id : -1);
+  const { data: posts } = useGetPostsByUserIdQuery(user?.id);
   const monogram = getFirstChars(splitStringAtSpace(user?.name));
 
   return (

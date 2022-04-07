@@ -3,7 +3,7 @@ import api from "./api";
 
 export const commentsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getCommentsByPostId: builder.query<Comment[], number>({
+    getCommentsByPostId: builder.query<Comment[], number | undefined>({
       query: (id) => `/comments?postId=${id}`,
     }),
     postComment: builder.mutation<Comment, Partial<Comment>>({

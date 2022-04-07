@@ -6,10 +6,10 @@ const postsApi = api.injectEndpoints({
     getPosts: builder.query<Post[], void>({
       query: () => "/posts",
     }),
-    getPostById: builder.query<Post, string>({
+    getPostById: builder.query<Post, string | undefined>({
       query: (id) => `/posts/${id}`,
     }),
-    getPostsByUserId: builder.query<Post[], number>({
+    getPostsByUserId: builder.query<Post[], number | undefined>({
       query: (id) => `/posts?userId=${id}`,
     }),
   }),

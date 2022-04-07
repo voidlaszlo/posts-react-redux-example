@@ -10,7 +10,7 @@ export const usersApi = api.injectEndpoints({
     getUsers: builder.query<User[], void>({
       query: () => "users",
     }),
-    getUserById: builder.query<User, number>({
+    getUserById: builder.query<User, number | undefined>({
       query: (id) => `/users/${id}`,
     }),
   }),

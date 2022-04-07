@@ -5,11 +5,11 @@ import Post from "../models/Post";
 import { makeFirstLetterUpperCase } from "../utils";
 
 interface PostComponentProps {
-  children: Post;
+  post?: Post;
 }
 
-const PostComponent = ({ children: post }: PostComponentProps) => {
-  const { data: owner } = useGetUserByIdQuery(post.userId);
+const PostComponent = ({ post }: PostComponentProps) => {
+  const { data: owner } = useGetUserByIdQuery(post?.userId);
   const [isExtended, setIsExtended] = useState(false);
   const [isProfilePage, setIsProfilePage] = useState(false);
   let navigate = useNavigate();
@@ -33,14 +33,14 @@ const PostComponent = ({ children: post }: PostComponentProps) => {
   };
 
   const navigateToExtendedPost = () => () => {
-    navigate(`../posts/${post.id}`, {
+    navigate(`../posts/${post?.id}`, {
       replace: false,
       state: { data: location },
     });
   };
 
   return (
-    <div key={post.id} className={isExtended ? "post reversed" : "post"}>
+    <div key={post?.id} className={isExtended ? "post reversed" : "post"}>
       <div className="post-header">
         <button
           className="extended-post-btn"
@@ -51,8 +51,8 @@ const PostComponent = ({ children: post }: PostComponentProps) => {
         </button>
       </div>
       <div className="post-body">
-        <h3 className="post-title">{makeFirstLetterUpperCase(post.title)}</h3>
-        <p>{post.body}</p>
+        <h3 className="post-title">{makeFirstLetterUpperCase(post?.title)}</h3>
+        <p>{post?.body}</p>
       </div>
       <div hidden={isProfilePage} className="post-footer">
         <small>written by </small>

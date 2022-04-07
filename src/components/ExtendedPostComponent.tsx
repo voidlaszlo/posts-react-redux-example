@@ -2,34 +2,32 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetCommentsByPostIdQuery } from "../api/commentsApi";
 import { useGetPostByIdQuery } from "../api/postsApi";
+import Comment from "../models/Comment";
 import Post from "../models/Post";
 import CommentComponent from "./CommentComponent";
+import ComponentMapper from "./ComponentMapper";
+import FetchErrorComponent from "./FetchErrorComponent";
 import PostComponent from "./PostComponent";
 
 const ExtendedPostComponent = () => {
   let params = useParams();
   const { data: post, isSuccess: isPostLoaded } = useGetPostByIdQuery(
-    params.id as string
+    params?.id
   );
   const { data: comments, isSuccess: areCommentsLoaded } =
-    useGetCommentsByPostIdQuery(post ? post.id : -1);
+    useGetCommentsByPostIdQuery(post?.id);
 
   return (
     <>
-      {isPostLoaded ? (
-        <PostComponent>{post ? post : ({} as Post)}</PostComponent>
-      ) : (
-        <div>loading...</div>
-      )}
+      {isPostLoaded ? <PostComponent post={post} /> : <div>loading...</div>}
       <h3 className="section-title">Comments</h3>
       {areCommentsLoaded ? (
-        comments?.map((comment) => (
-          <React.Fragment key={comment.id}>
-            <CommentComponent comment={comment} />
-          </React.Fragment>
-        ))
+        <ComponentMapper
+          items={comments}
+          element={(comment: Comment) => <CommentComponent comment={comment} />}
+        />
       ) : (
-        <div>loading...</div>
+        <div>Loading...</div>
       )}
     </>
   );
