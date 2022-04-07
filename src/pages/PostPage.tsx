@@ -2,11 +2,12 @@ import { useParams } from "react-router-dom";
 import { useGetCommentsByPostIdQuery } from "../api/commentsApi";
 import { useGetPostByIdQuery } from "../api/postsApi";
 import Comment from "../models/Comment";
-import CommentComponent from "./CommentComponent";
-import ComponentMapper from "./ComponentMapper";
-import PostComponent from "./PostComponent";
+import CommentCard from "../components/CommentCard";
+import ComponentMapper from "../components/helpers/ComponentMapper";
+import PostCard from "../components/PostCard";
+import Loading from "../components/helpers/Loading";
 
-const ExtendedPostComponent = () => {
+const PostPage = () => {
   let params = useParams();
   const { data: post, isSuccess: isPostLoaded } = useGetPostByIdQuery(
     params?.id
@@ -16,18 +17,20 @@ const ExtendedPostComponent = () => {
 
   return (
     <>
-      {isPostLoaded ? <PostComponent post={post} /> : <div>loading...</div>}
+      {isPostLoaded ? <PostCard post={post} /> : <Loading />}
       <h3 className="section-title">Comments</h3>
       {areCommentsLoaded ? (
         <ComponentMapper
           items={comments}
-          element={(comment: Comment) => <CommentComponent comment={comment} />}
+          elementRenderer={(comment: Comment) => (
+            <CommentCard comment={comment} />
+          )}
         />
       ) : (
-        <div>Loading...</div>
+        <Loading />
       )}
     </>
   );
 };
 
-export default ExtendedPostComponent;
+export default PostPage;

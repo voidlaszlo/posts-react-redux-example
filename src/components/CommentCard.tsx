@@ -5,7 +5,7 @@ interface Props {
   comment?: Comment;
 }
 
-const CommentComponent = ({ comment }: Props) => {
+const CommentCard = ({ comment }: Props) => {
   return (
     <div className="comment">
       <div className="comment-body">
@@ -20,4 +20,4 @@ const CommentComponent = ({ comment }: Props) => {
   );
 };
 
-export default CommentComponent;
+export default CommentCard;

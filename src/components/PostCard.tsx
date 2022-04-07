@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGetUserByIdQuery } from "../api/usersApi";
 import Post from "../models/Post";
+import User from "../models/User";
 import { makeFirstLetterUpperCase } from "../utils";
 
 interface Props {
   post?: Post;
 }
 
-const PostComponent = ({ post }: Props) => {
-  const { data: owner } = useGetUserByIdQuery(post?.userId);
+const PostCard = ({ post }: Props) => {
+  const { data: { username } = {} as User } = useGetUserByIdQuery(post?.userId);
   const [isExtended, setIsExtended] = useState(false);
   const [isProfilePage, setIsProfilePage] = useState(false);
   let navigate = useNavigate();
@@ -20,13 +21,13 @@ const PostComponent = ({ post }: Props) => {
       setIsExtended(true);
     }
 
-    if (location.pathname.includes(`/profiles/${owner?.id}`)) {
+    if (location.pathname.includes(`/profiles/${post?.userId}`)) {
       setIsProfilePage(true);
     }
-  }, []);
+  }, [location.pathname, post?.userId]);
 
   const navigateToOwnersProfile = () => () => {
-    navigate(`../profiles/${owner?.id}`, {
+    navigate(`../profiles/${post?.userId}`, {
       replace: false,
       state: { data: location },
     });
@@ -57,11 +58,11 @@ const PostComponent = ({ post }: Props) => {
       <div hidden={isProfilePage} className="post-footer">
         <small>written by </small>
         <button className="owner-btn" onClick={navigateToOwnersProfile()}>
-          {owner?.username}
+          {username}
         </button>
       </div>
     </div>
   );
 };
 
-export default PostComponent;
+export default PostCard;

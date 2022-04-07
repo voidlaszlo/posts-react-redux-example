@@ -1,11 +1,14 @@
+import React, { lazy } from "react";
 import { useParams } from "react-router-dom";
 import { useGetPostsByUserIdQuery } from "../api/postsApi";
 import { useGetUserByIdQuery } from "../api/usersApi";
+import Loading from "../components/helpers/Loading";
 import "../css/userPage.styles.css";
 import { getFirstChars, splitStringAtSpace } from "../utils";
-import PostComponentContainer from "./PostComponentContainer";
-import UserAddress from "./UserAddress";
-import UserCompany from "./UserCompany";
+
+const PostsPage = lazy(() => import("./PostsPage"));
+const UserAddress = lazy(() => import("../components/UserAddress"));
+const UserCompany = lazy(() => import("../components/UserCompany"));
 
 const UserPage = () => {
   let params = useParams();
@@ -38,10 +41,12 @@ const UserPage = () => {
               <p>{user?.phone}</p>
             </div>
           </div>
-          <UserAddress address={user?.address} />
-          <UserCompany company={user?.company} />
+          <React.Suspense fallback={<Loading />}>
+            <UserAddress address={user?.address} />
+            <UserCompany company={user?.company} />
+          </React.Suspense>
         </div>
-        {posts && <PostComponentContainer posts={posts} />}
+        {posts && <PostsPage posts={posts} />}
       </div>
     </>
   );
