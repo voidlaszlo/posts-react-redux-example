@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-const URL = "https://jsonplaceholder.typicode.com/";
+const URL = "http://localhost:3001/";
 
 export const api = createApi({
   reducerPath: "api",
@@ -11,6 +11,7 @@ export const api = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Post", "User", "Comment"],
   endpoints: () => ({}),
 });
 

@@ -1,38 +1,28 @@
-import React, { lazy } from "react";
-import { Route, Routes } from "react-router-dom";
-import { useGetPostsQuery } from "./api/postsApi";
+import React, { useEffect, useState } from "react";
 import { useLoginQuery } from "./api/usersApi";
-import Header from "./components/Header";
 import Loading from "./components/helpers/Loading";
-import "./css/app.css";
-import { setCurrentUser } from "./features/currentUserSlice";
+import { setUser } from "./features/userSlice";
 import { useAppDispatch } from "./hooks/hooks";
-
-const UserPage = lazy(() => import("./pages/UserPage"));
-const PostPage = lazy(() => import("./pages/PostPage"));
-const PostsPage = lazy(() => import("./pages/PostsPage"));
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
+  // TODO: should be in login
   const dispatch = useAppDispatch();
   const { data: user } = useLoginQuery();
-  const { data: posts } = useGetPostsQuery();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  if (user) {
-    dispatch(setCurrentUser(user));
-  }
+  useEffect(() => {
+    if (user) {
+      dispatch(setUser(user));
+      setIsLoggedIn(true);
+    }
+  }, [dispatch, user]);
 
   return (
     <div>
-      <Header />
       <React.Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/profiles/:id" element={<UserPage />} />
-          <Route path="/posts/:id" element={<PostPage />} />
-          <Route
-            path="/"
-            element={posts ? <PostsPage posts={posts} /> : <Loading />}
-          />
-        </Routes>
+        {isLoggedIn ? <Home /> : <LoginPage />}
       </React.Suspense>
     </div>
   );

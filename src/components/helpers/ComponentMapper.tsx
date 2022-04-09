@@ -17,4 +17,7 @@ const ComponentMapper = <T,>({ items, elementRenderer }: Props<T>) => {
   );
 };
 
+ComponentMapper.displayName = "ComponentMapper";
+ComponentMapper.defaultProps = {};
+
 export default ComponentMapper;

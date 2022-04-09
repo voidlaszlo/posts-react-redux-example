@@ -1,29 +1,24 @@
 export default interface User {
   id: number;
   name: string;
-  username: string;
-  email: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
+  imageUrl: string;
+  coverImageUrl: string;
+  about: string;
+  fields: Fields;
+  href: string;
+  friends: number[];
+  photos: Photo[];
 }
 
-export interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
+export interface Fields {
+  Phone: string;
+  Email: string;
+  Relationship: string;
+  Location: string;
+  Birthday: string;
 }
 
-export interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
-}
-
-export interface Geo {
-  lat: string;
-  lng: string;
+export interface Photo {
+  source: string;
+  title: string;
 }

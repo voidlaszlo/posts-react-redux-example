@@ -6,4 +6,7 @@ const FetchErrorComponent = () => {
   );
 };
 
+FetchErrorComponent.displayName = "FetchErrorComponent";
+FetchErrorComponent.defaultProps = {};
+
 export default FetchErrorComponent;
