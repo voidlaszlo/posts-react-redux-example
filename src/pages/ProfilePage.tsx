@@ -1,13 +1,12 @@
 import { ChevronLeftIcon, MailIcon, PhoneIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
-import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
-import { useGetUserByIdQuery, useGetUsersByIdsQuery } from "../api/usersApi";
+import { useParams } from "react-router-dom";
+import { useGetUserByIdQuery } from "../api/usersApi";
 import FriendsList from "../components/FriendsList";
 import ProfileDescription from "../components/ProfileDescription";
 import ProfilePhotos from "../components/ProfilePhotos";
 import { selectUser } from "../features/userSlice";
 import { useAppSelector } from "../hooks/hooks";
-import { Fields } from "../models/User";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -20,7 +19,7 @@ const tabs = [
 
 const ProfilePage = () => {
   let { id } = useParams();
-  const [currentTab, setCurrentTab] = useState("Photos");
+  const [currentTab, setCurrentTab] = useState("Profile");
   const self = useAppSelector(selectUser);
   const [isSelf, setIsSelf] = useState(false);
   const { data: profile } = useGetUserByIdQuery(Number(id));

@@ -3,10 +3,9 @@ import api from "./api";
 
 export const usersApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.query<User, void>({
+    login: builder.query<User, string>({
       // TODO: implement real login logic instead of using user 1
-      query: () => "/users/3",
-      providesTags: ["User"],
+      query: (id) => `/users/${id}`,
     }),
     getUsers: builder.query<User[], void>({
       query: () => "users",

@@ -9,13 +9,15 @@ import {
   StarIcon,
   ThumbUpIcon,
 } from "@heroicons/react/solid";
-import { Fragment } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import { useGetPostsQuery } from "../api/postsApi";
+import NewPost from "../components/NewPost";
+import Post from "../models/Post";
 
-const tabs: any = [
-  { name: "Recent", href: "#", current: true },
-  { name: "Most Liked", href: "#", current: false },
-  { name: "Most Answers", href: "#", current: false },
+const tabs: { name: string }[] = [
+  { name: "Recent" },
+  { name: "Most Liked" },
+  { name: "Most Viewed" },
 ];
 
 function classNames(...classes: string[]) {
@@ -23,19 +25,71 @@ function classNames(...classes: string[]) {
 }
 
 const Posts = () => {
-  const { data: posts } = useGetPostsQuery();
+  const { data: posts = [] } = useGetPostsQuery();
+  const [currentSortType, setCurrentSortType] = useState<string>(tabs[0].name);
+
+  let postsToShow: Post[] = [];
+
+  const byRecent = (a: Post, b: Post) => b.datetime.localeCompare(a.datetime);
+  const byLikes = (a: Post, b: Post) => b.likes - a.likes;
+  const byViews = (a: Post, b: Post) => b.views - a.views;
+
+  const sortedByRecent = useMemo(() => {
+    let sortedPosts = posts.slice();
+    sortedPosts.sort(byRecent);
+    return sortedPosts;
+  }, [posts]);
+
+  const sortedByLikes = useMemo(() => {
+    let sortedPosts = posts.slice();
+    sortedPosts.sort(byLikes);
+    return sortedPosts;
+  }, [posts]);
+
+  const sortedByViews = useMemo(() => {
+    let sortedPosts = posts.slice();
+    sortedPosts.sort(byViews);
+    return sortedPosts;
+  }, [posts]);
+
+  switch (currentSortType) {
+    case "Most Liked":
+      postsToShow = sortedByLikes;
+      break;
+    case "Most Viewed":
+      postsToShow = sortedByViews;
+      break;
+    default:
+      postsToShow = sortedByRecent;
+      break;
+  }
+
+  const selectSortType = (
+    e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLOptionElement>,
+    sortType: string
+  ) => {
+    e.preventDefault();
+    setCurrentSortType(sortType);
+  };
+
+  const selectOptionSortType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    setCurrentSortType(e.target.value);
+  };
 
   return (
-    <main className="lg:col-span-9 xl:col-span-6">
-      <div className="px-4 sm:px-0">
+    <main className="px-2 lg:col-span-9 xl:col-span-6">
+      <NewPost />
+      <div className="px-4 sm:px-0 mt-4">
         <div className="sm:hidden">
-          <label htmlFor="question-tabs" className="sr-only">
+          <label htmlFor="posts-tabs" className="sr-only">
             Select a tab
           </label>
           <select
-            id="question-tabs"
+            id="posts-tabs"
+            onChange={(e) => selectOptionSortType(e)}
             className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500"
-            defaultValue={tabs.find((tab: any) => tab.current).name}
+            value={currentSortType}
           >
             {tabs.map((tab: any) => (
               <option key={tab.name}>{tab.name}</option>
@@ -48,12 +102,12 @@ const Posts = () => {
             aria-label="Tabs"
           >
             {tabs.map((tab: any, tabIdx: any) => (
-              <a
+              <button
                 key={tab.name}
-                href={tab.href}
-                aria-current={tab.current ? "page" : undefined}
+                onClick={(e) => selectSortType(e, tab.name)}
+                aria-current={tab.name === currentSortType ? "page" : undefined}
                 className={classNames(
-                  tab.current
+                  tab.name === currentSortType
                     ? "text-gray-900"
                     : "text-gray-500 hover:text-gray-700",
                   tabIdx === 0 ? "rounded-l-lg" : "",
@@ -65,11 +119,13 @@ const Posts = () => {
                 <span
                   aria-hidden="true"
                   className={classNames(
-                    tab.current ? "bg-rose-500" : "bg-transparent",
+                    tab.name === currentSortType
+                      ? "bg-rose-500"
+                      : "bg-transparent",
                     "absolute inset-x-0 bottom-0 h-0.5"
                   )}
                 />
-              </a>
+              </button>
             ))}
           </nav>
         </div>
@@ -77,7 +133,7 @@ const Posts = () => {
       <div className="mt-4">
         <h1 className="sr-only">Recent posts</h1>
         <ul className="space-y-4">
-          {posts?.map((question) => (
+          {postsToShow.map((question) => (
             <li
               key={question.id}
               className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"

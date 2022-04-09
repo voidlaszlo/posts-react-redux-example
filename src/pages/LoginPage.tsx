@@ -1,30 +1,10 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-export default function LoginPage() {
+import React from "react";
+
+interface Props {}
+
+const LoginPage: React.FC<Props> = (props: Readonly<Props>) => {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
@@ -60,7 +40,6 @@ export default function LoginPage() {
                   <input
                     id="email"
                     name="email"
-                    type="email"
                     autoComplete="email"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -81,7 +60,6 @@ export default function LoginPage() {
                     name="password"
                     type="password"
                     autoComplete="current-password"
-                    required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -201,4 +179,6 @@ export default function LoginPage() {
       </div>
     </>
   );
-}
+};
+
+export default LoginPage;

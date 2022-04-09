@@ -10,6 +10,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/solid";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { selectUser } from "../features/userSlice";
 import { useAppSelector } from "../hooks/hooks";
 
@@ -48,19 +49,19 @@ const Header = () => {
         )
       }
     >
-      {({ open }) => (
+      {({ open, close }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
               <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                 <div className="flex-shrink-0 flex items-center">
-                  <a href="/">
+                  <Link to="/">
                     <img
                       className="block h-8 w-auto"
                       src="https://tailwindui.com/img/logos/workflow-mark.svg?color=rose&shade=500"
                       alt="Workflow"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
@@ -99,19 +100,19 @@ const Header = () => {
                 </Popover.Button>
               </div>
               <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="text-sm font-medium text-gray-900 hover:underline"
                 >
                   Go Premium
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="#"
                   className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </a>
+                </Link>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="flex-shrink-0 relative ml-5">
@@ -138,15 +139,15 @@ const Header = () => {
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href={item.href}
+                            <Link
+                              to={item.href}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block py-2 px-4 text-sm text-gray-700"
                               )}
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       ))}
@@ -154,12 +155,12 @@ const Header = () => {
                   </Transition>
                 </Menu>
 
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
                 >
                   New Post
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -167,9 +168,9 @@ const Header = () => {
           <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
             <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   aria-current={item.current ? "page" : undefined}
                   className={classNames(
                     item.current
@@ -179,7 +180,7 @@ const Header = () => {
                   )}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
             <div className="border-t border-gray-200 pt-4">
@@ -209,32 +210,32 @@ const Header = () => {
               </div>
               <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
                 {userNavigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
 
             <div className="mt-6 max-w-3xl mx-auto px-4 sm:px-6">
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700"
               >
                 New Post
-              </a>
+              </Link>
 
               <div className="mt-6 flex justify-center">
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="text-base font-medium text-gray-900 hover:underline"
                 >
                   Go Premium
-                </a>
+                </Link>
               </div>
             </div>
           </Popover.Panel>
