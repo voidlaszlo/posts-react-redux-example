@@ -10,7 +10,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/solid";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout, selectUser } from "../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
@@ -25,10 +25,6 @@ const navigation = [
   },
   { name: "Trending", href: "/trending", icon: TrendingUpIcon, current: false },
 ];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const Header = () => {
   const user = useAppSelector(selectUser);
@@ -245,5 +241,9 @@ const Header = () => {
     </Popover>
   );
 };
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default Header;

@@ -17,16 +17,16 @@ import NewPost from "../components/NewPost";
 import { selectUser } from "../features/userSlice";
 import { useAppSelector } from "../hooks/hooks";
 import Post from "../models/Post";
-
-const tabs: { name: string }[] = [
-  { name: "Recent" },
-  { name: "Most Liked" },
-  { name: "Most Viewed" },
-];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import User from "../models/User";
+import {
+  byLikes,
+  byRecent,
+  byViews,
+  MOST_LIKED,
+  MOST_VIEWED,
+  tabs,
+} from "./constants";
+import { like, sortBy } from "./postsUtils";
 
 const Posts = () => {
   const { data: posts = [] } = useGetPostsQuery();
@@ -36,33 +36,26 @@ const Posts = () => {
 
   let postsToShow: Post[] = [];
 
-  const byRecent = (a: Post, b: Post) => b.datetime.localeCompare(a.datetime);
-  const byLikes = (a: Post, b: Post) => b.likes.length - a.likes.length;
-  const byViews = (a: Post, b: Post) => b.views - a.views;
+  const sortedByRecent = useMemo(
+    () => sortBy({ by: byRecent, array: posts }),
+    [posts]
+  );
 
-  const sortedByRecent = useMemo(() => {
-    let sortedPosts = posts.slice();
-    sortedPosts.sort(byRecent);
-    return sortedPosts;
-  }, [posts]);
+  const sortedByLikes = useMemo(
+    () => sortBy({ by: byLikes, array: posts }),
+    [posts]
+  );
 
-  const sortedByLikes = useMemo(() => {
-    let sortedPosts = posts.slice();
-    sortedPosts.sort(byLikes);
-    return sortedPosts;
-  }, [posts]);
-
-  const sortedByViews = useMemo(() => {
-    let sortedPosts = posts.slice();
-    sortedPosts.sort(byViews);
-    return sortedPosts;
-  }, [posts]);
+  const sortedByViews = useMemo(
+    () => sortBy({ by: byViews, array: posts }),
+    [posts]
+  );
 
   switch (currentSortType) {
-    case "Most Liked":
+    case MOST_LIKED:
       postsToShow = sortedByLikes;
       break;
-    case "Most Viewed":
+    case MOST_VIEWED:
       postsToShow = sortedByViews;
       break;
     default:
@@ -70,31 +63,23 @@ const Posts = () => {
       break;
   }
 
-  const selectSortType = (
-    e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLOptionElement>,
+  const handleSelectSortType = (
+    e: React.MouseEvent<HTMLButtonElement>,
     sortType: string
   ) => {
     e.preventDefault();
     setCurrentSortType(sortType);
   };
 
-  const selectOptionSortType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectOptionSortType = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     e.preventDefault();
     setCurrentSortType(e.target.value);
   };
 
-  const handleLike = (post: Post) => {
-    console.log(post);
-    if (user) {
-      const nextPost = produce(post, (draft) => {
-        if (!post.likes.includes(user.id)) {
-          draft.likes.push(user.id);
-        } else {
-          draft.likes.splice(draft.likes.indexOf(user.id), 1);
-        }
-      });
-      update(nextPost);
-    }
+  const handleLike = (post: Post, userId: number) => {
+    update(like(post, userId));
   };
 
   return (
@@ -107,7 +92,7 @@ const Posts = () => {
           </label>
           <select
             id="posts-tabs"
-            onChange={(e) => selectOptionSortType(e)}
+            onChange={(e) => handleSelectOptionSortType(e)}
             className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500"
             value={currentSortType}
           >
@@ -124,7 +109,7 @@ const Posts = () => {
             {tabs.map((tab: any, tabIdx: any) => (
               <button
                 key={tab.name}
-                onClick={(e) => selectSortType(e, tab.name)}
+                onClick={(e) => handleSelectSortType(e, tab.name)}
                 aria-current={tab.name === currentSortType ? "page" : undefined}
                 className={classNames(
                   tab.name === currentSortType
@@ -293,7 +278,9 @@ const Posts = () => {
                               : ""
                           }`}
                           aria-hidden="true"
-                          onClick={() => handleLike(post)}
+                          onClick={() =>
+                            user ? handleLike(post, user.id) : undefined
+                          }
                         />
                         <span className="font-medium text-gray-900">
                           {post.likes.length}
@@ -346,5 +333,9 @@ const Posts = () => {
     </main>
   );
 };
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default Posts;
