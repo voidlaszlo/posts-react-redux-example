@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useGetProfilesByIdsQuery } from "../../api/profilesApi";
 import Profile from "../../models/Profile";
 
@@ -27,7 +28,7 @@ const FriendsList: React.FC<Props> = (props: Readonly<Props>) => {
               />
             </div>
             <div className="flex-1 min-w-0">
-              <a href={friend.href} className="focus:outline-none">
+              <Link to={friend.href} className="focus:outline-none">
                 <span className="absolute inset-0" aria-hidden="true" />
                 <p className="text-sm font-medium text-gray-900">
                   {friend.name}
@@ -35,7 +36,7 @@ const FriendsList: React.FC<Props> = (props: Readonly<Props>) => {
                 <p className="text-sm text-gray-500 truncate">
                   {friend.fields.Email}
                 </p>
-              </a>
+              </Link>
             </div>
           </div>
         ))}

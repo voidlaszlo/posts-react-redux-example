@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, MailIcon, PhoneIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FriendsList from "./FriendsList";
 import ProfileDescription from "./ProfileDescription";
 import ProfilePhotos from "./ProfilePhotos";
@@ -41,8 +41,8 @@ const ProfilePage = () => {
         className="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden"
         aria-label="Breadcrumb"
       >
-        <a
-          href="/"
+        <Link
+          to="/"
           className="inline-flex items-center space-x-3 text-sm font-medium text-gray-900"
         >
           <ChevronLeftIcon
@@ -50,7 +50,7 @@ const ProfilePage = () => {
             aria-hidden="true"
           />
           <span>Home</span>
-        </a>
+        </Link>
       </nav>
 
       <article>
