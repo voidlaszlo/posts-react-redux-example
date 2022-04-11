@@ -1,5 +1,5 @@
 import React from "react";
-import User, { Fields } from "../models/User";
+import User, { Fields } from "../../models/User";
 
 interface Props {
   profile: User;

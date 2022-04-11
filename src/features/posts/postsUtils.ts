@@ -1,5 +1,5 @@
 import produce, { Draft } from "immer";
-import Post from "../models/Post";
+import Post from "../../models/Post";
 
 interface SortByParameters<T> {
   by: (a: Draft<T>, b: Draft<T>) => number;

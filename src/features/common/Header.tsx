@@ -11,8 +11,8 @@ import {
 } from "@heroicons/react/solid";
 import { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logout, selectUser } from "../features/userSlice";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { logout, selectUser } from "../profiles/profileSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon, current: true },

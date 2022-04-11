@@ -1,8 +1,8 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useState } from "react";
-import { useLoginQuery } from "../api/usersApi";
-import { login } from "../features/userSlice";
-import { useAppDispatch } from "../hooks/hooks";
+import { useLoginQuery } from "../../api/usersApi";
+import { login } from "../profiles/profileSlice";
+import { useAppDispatch } from "../../hooks/hooks";
 
 interface Props {}
 

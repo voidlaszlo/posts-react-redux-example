@@ -1,6 +1,6 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { userSlice } from "../features/userSlice";
+import { userSlice } from "../features/profiles/profileSlice";
 import { api } from "../api/api";
 
 export const store = configureStore({

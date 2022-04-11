@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { usePostMutation } from "../api/postsApi";
-import { selectUser } from "../features/userSlice";
-import { useAppSelector } from "../hooks/hooks";
-import Post from "../models/Post";
+import { usePostMutation } from "../../api/postsApi";
+import { selectUser } from "../profiles/profileSlice";
+import { useAppSelector } from "../../hooks/hooks";
+import Post from "../../models/Post";
 
 const NewPost: React.FC = () => {
   const user = useAppSelector(selectUser);
-  const [post, result] = usePostMutation();
+  const [post] = usePostMutation();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 

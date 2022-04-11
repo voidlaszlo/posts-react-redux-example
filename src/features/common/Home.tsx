@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
-import Posts from "./Posts";
-import ProfilePage from "./ProfilePage";
+import Header from "./Header";
+import ProfilePage from "../profiles/ProfilePage";
 import styles from "./Home.styles";
+import Posts from "../posts/Posts";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 export default function Home() {
   return (

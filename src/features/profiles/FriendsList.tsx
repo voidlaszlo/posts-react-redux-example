@@ -1,6 +1,6 @@
 import React from "react";
-import { useGetUsersByIdsQuery } from "../api/usersApi";
-import User from "../models/User";
+import { useGetUsersByIdsQuery } from "../../api/usersApi";
+import User from "../../models/User";
 
 interface Props {
   profile: User;

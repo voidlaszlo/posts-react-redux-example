@@ -1,12 +1,12 @@
 import { ChevronLeftIcon, MailIcon, PhoneIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetUserByIdQuery } from "../api/usersApi";
-import FriendsList from "../components/FriendsList";
-import ProfileDescription from "../components/ProfileDescription";
-import ProfilePhotos from "../components/ProfilePhotos";
-import { selectUser } from "../features/userSlice";
-import { useAppSelector } from "../hooks/hooks";
+import FriendsList from "./FriendsList";
+import ProfileDescription from "./ProfileDescription";
+import ProfilePhotos from "./ProfilePhotos";
+import { selectUser } from "./profileSlice";
+import { useAppSelector } from "../../hooks/hooks";
+import { useGetUserByIdQuery } from "../../api/usersApi";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

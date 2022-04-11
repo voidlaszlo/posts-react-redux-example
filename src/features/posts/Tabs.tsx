@@ -1,5 +1,5 @@
 import React from "react";
-import { tabs } from "./constants";
+import { tabs } from "../../constants/constants";
 
 interface Props {
   currentSortType: string;
