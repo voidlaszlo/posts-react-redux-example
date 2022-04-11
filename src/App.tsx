@@ -1,24 +1,13 @@
-import React, { useEffect } from "react";
-import { useLoginQuery } from "./api/usersApi";
-import { setUser } from "./features/userSlice";
-import { useAppDispatch } from "./hooks/hooks";
+import React from "react";
+import { selectUser } from "./features/userSlice";
+import { useAppSelector } from "./hooks/hooks";
 import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
-  const { data: user } = useLoginQuery("3");
-  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
 
-  useEffect(() => {
-    if (user) {
-      dispatch(setUser(user));
-    }
-  }, [dispatch, user]);
-
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+  return user ? <Home /> : <LoginPage />;
 }
 
 export default App;

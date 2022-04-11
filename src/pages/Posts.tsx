@@ -9,9 +9,13 @@ import {
   StarIcon,
   ThumbUpIcon,
 } from "@heroicons/react/solid";
+import produce from "immer";
 import React, { Fragment, useMemo, useState } from "react";
-import { useGetPostsQuery } from "../api/postsApi";
+import { Link } from "react-router-dom";
+import { useGetPostsQuery, useUpdateMutation } from "../api/postsApi";
 import NewPost from "../components/NewPost";
+import { selectUser } from "../features/userSlice";
+import { useAppSelector } from "../hooks/hooks";
 import Post from "../models/Post";
 
 const tabs: { name: string }[] = [
@@ -27,11 +31,13 @@ function classNames(...classes: string[]) {
 const Posts = () => {
   const { data: posts = [] } = useGetPostsQuery();
   const [currentSortType, setCurrentSortType] = useState<string>(tabs[0].name);
+  const [update] = useUpdateMutation();
+  const user = useAppSelector(selectUser);
 
   let postsToShow: Post[] = [];
 
   const byRecent = (a: Post, b: Post) => b.datetime.localeCompare(a.datetime);
-  const byLikes = (a: Post, b: Post) => b.likes - a.likes;
+  const byLikes = (a: Post, b: Post) => b.likes.length - a.likes.length;
   const byViews = (a: Post, b: Post) => b.views - a.views;
 
   const sortedByRecent = useMemo(() => {
@@ -75,6 +81,20 @@ const Posts = () => {
   const selectOptionSortType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     setCurrentSortType(e.target.value);
+  };
+
+  const handleLike = (post: Post) => {
+    console.log(post);
+    if (user) {
+      const nextPost = produce(post, (draft) => {
+        if (!post.likes.includes(user.id)) {
+          draft.likes.push(user.id);
+        } else {
+          draft.likes.splice(draft.likes.indexOf(user.id), 1);
+        }
+      });
+      update(nextPost);
+    }
   };
 
   return (
@@ -150,14 +170,12 @@ const Posts = () => {
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium text-gray-900">
-                        <a href={post.author.href} className="hover:underline">
+                        <Link to={post.author.href} className="hover:underline">
                           {post.author.name}
-                        </a>
+                        </Link>
                       </p>
                       <p className="text-sm text-gray-500">
-                        <a href={post.href} className="hover:underline">
-                          <time dateTime={post.datetime}>{post.date}</time>
-                        </a>
+                        <time dateTime={post.datetime}>{post.date}</time>
                       </p>
                     </div>
                     <div className="flex-shrink-0 self-center flex">
@@ -267,9 +285,18 @@ const Posts = () => {
                         type="button"
                         className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
                       >
-                        <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
+                        <ThumbUpIcon
+                          //text-rose-500
+                          className={`h-5 w-5 ${
+                            post.likes.includes(user ? user.id : -1)
+                              ? "text-rose-500"
+                              : ""
+                          }`}
+                          aria-hidden="true"
+                          onClick={() => handleLike(post)}
+                        />
                         <span className="font-medium text-gray-900">
-                          {post.likes}
+                          {post.likes.length}
                         </span>
                         <span className="sr-only">likes</span>
                       </button>

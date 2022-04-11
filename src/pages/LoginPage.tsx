@@ -1,8 +1,26 @@
-import React from "react";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+import React, { useState } from "react";
+import { useLoginQuery } from "../api/usersApi";
+import { login } from "../features/userSlice";
+import { useAppDispatch } from "../hooks/hooks";
 
 interface Props {}
 
 const LoginPage: React.FC<Props> = (props: Readonly<Props>) => {
+  const [email, setEmail] = useState<string | symbol>(skipToken);
+  const { data: user } = useLoginQuery(email);
+  const dispatch = useAppDispatch();
+
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (user) {
+      dispatch(login(user));
+    }
+  };
+
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -28,7 +46,7 @@ const LoginPage: React.FC<Props> = (props: Readonly<Props>) => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
               <div>
                 <label
                   htmlFor="email"
@@ -40,6 +58,7 @@ const LoginPage: React.FC<Props> = (props: Readonly<Props>) => {
                   <input
                     id="email"
                     name="email"
+                    onChange={(e) => onEmailChange(e)}
                     autoComplete="email"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

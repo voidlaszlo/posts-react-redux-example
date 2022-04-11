@@ -23,6 +23,14 @@ const postsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
+    update: builder.mutation<Post, Partial<Post>>({
+      query: ({ id, ...rest }) => ({
+        url: `/posts/${id}`,
+        method: "PUT",
+        body: rest,
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -31,4 +39,5 @@ export const {
   useGetPostByIdQuery,
   useGetPostsByUserIdQuery,
   usePostMutation,
+  useUpdateMutation,
 } = postsApi;

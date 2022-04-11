@@ -3,7 +3,7 @@ import api from "./api";
 
 export const usersApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.query<User, string>({
+    login: builder.query<User, string | SkipToken>({
       // TODO: implement real login logic instead of using user 1
       query: (id) => `/users/${id}`,
     }),
@@ -22,6 +22,14 @@ export const usersApi = api.injectEndpoints({
       },
       providesTags: ["User"],
     }),
+    updateUser: builder.mutation<User, Partial<User>>({
+      query: ({ id, ...rest }) => ({
+        url: `/useres/${id}`,
+        method: "PUT",
+        body: rest,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -30,4 +38,7 @@ export const {
   useGetUsersQuery,
   useGetUserByIdQuery,
   useGetUsersByIdsQuery,
+  useUpdateUserMutation,
 } = usersApi;
+
+type SkipToken = Symbol;

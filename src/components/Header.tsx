@@ -11,8 +11,8 @@ import {
 } from "@heroicons/react/solid";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { selectUser } from "../features/userSlice";
-import { useAppSelector } from "../hooks/hooks";
+import { logout, selectUser } from "../features/userSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon, current: true },
@@ -32,11 +32,16 @@ function classNames(...classes: string[]) {
 
 const Header = () => {
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  const onSignOut = () => {
+    dispatch(logout());
+  };
 
   const userNavigation = [
     { name: "Your Profile", href: `/profiles/${user?.id}` },
     { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    { name: "Sign out", href: "#", onClick: () => onSignOut() },
   ];
 
   return (
@@ -102,12 +107,6 @@ const Header = () => {
               <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                 <Link
                   to="#"
-                  className="text-sm font-medium text-gray-900 hover:underline"
-                >
-                  Go Premium
-                </Link>
-                <Link
-                  to="#"
                   className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
                 >
                   <span className="sr-only">View notifications</span>
@@ -141,6 +140,7 @@ const Header = () => {
                           {({ active }) => (
                             <Link
                               to={item.href}
+                              onClick={item.onClick}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block py-2 px-4 text-sm text-gray-700"
@@ -213,6 +213,7 @@ const Header = () => {
                   <Link
                     key={item.name}
                     to={item.href}
+                    onClick={item.onClick}
                     className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                   >
                     {item.name}

@@ -10,10 +10,10 @@ const NewPost: React.FC = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const onTitleChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
 
-  const onBodyChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+  const onBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setBody(e.target.value);
 
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -23,7 +23,7 @@ const NewPost: React.FC = () => {
 
     let posty: Partial<Post> = user
       ? {
-          likes: 0,
+          likes: [],
           replies: 0,
           views: 0,
           author: {
@@ -55,7 +55,7 @@ const NewPost: React.FC = () => {
               name="title"
               id="title"
               value={title}
-              onChange={onTitleChanged}
+              onChange={onTitleChange}
               className="block w-full py-3 px-3 border-0 border-b-2 border-gray-100 focus:ring-0 sm:text-sm"
               placeholder="Write your title"
             />
@@ -67,7 +67,7 @@ const NewPost: React.FC = () => {
               name="comment"
               id="comment"
               value={body}
-              onChange={onBodyChanged}
+              onChange={onBodyChange}
               className="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm"
               placeholder="Add your comment..."
             />
