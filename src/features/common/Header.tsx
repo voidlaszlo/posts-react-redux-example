@@ -1,18 +1,21 @@
-import { Popover, Menu, Transition } from "@headlessui/react";
+import { Menu, Popover, Transition } from "@headlessui/react";
 import {
-  SearchIcon,
-  XIcon,
-  MenuIcon,
   BellIcon,
   FireIcon,
   HomeIcon,
+  MenuIcon,
+  SearchIcon,
   TrendingUpIcon,
   UserGroupIcon,
+  XIcon,
 } from "@heroicons/react/solid";
-import { Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { logout, selectProfile } from "../profiles/profileSlice";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+import { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
+import { useGetProfilesByNameQuery } from "../../api/profilesApi";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { logout, selectProfile } from "../profiles/profileSlice";
+import SearchBar from "./SearchBar";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon, current: true },
@@ -50,7 +53,7 @@ const Header = () => {
         )
       }
     >
-      {({ open, close }) => (
+      {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
@@ -71,21 +74,7 @@ const Header = () => {
                     <label htmlFor="search" className="sr-only">
                       Search
                     </label>
-                    <div className="relative">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-                        <SearchIcon
-                          className="h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <input
-                        id="search"
-                        name="search"
-                        className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm"
-                        placeholder="Search"
-                        type="search"
-                      />
-                    </div>
+                    <SearchBar />
                   </div>
                 </div>
               </div>

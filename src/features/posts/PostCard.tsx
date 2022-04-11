@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useUpdateMutation } from "../../api/postsApi";
 import Post from "../../models/Post";
 import PostCardMenu from "./PostCardMenu";
-import { like } from "./postsUtils";
+import { like } from "./utils";
 
 interface Props {
   post: Post;

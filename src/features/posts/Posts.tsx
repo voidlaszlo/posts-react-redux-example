@@ -13,7 +13,7 @@ import Post from "../../models/Post";
 import { selectProfile } from "../profiles/profileSlice";
 import NewPost from "./NewPost";
 import PostCard from "./PostCard";
-import { sortBy } from "./postsUtils";
+import { sortBy } from "./utils";
 import Tabs from "./Tabs";
 
 const Posts = () => {

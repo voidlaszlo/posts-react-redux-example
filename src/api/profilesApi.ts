@@ -29,6 +29,9 @@ export const profilesApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Profile"],
     }),
+    getProfilesByName: builder.query<Profile[], string | SkipToken>({
+      query: (name) => `/profiles?name_like=${name}`,
+    }),
   }),
 });
 
@@ -37,6 +40,7 @@ export const {
   useGetProfilesQuery,
   useGetProfileByIdQuery,
   useGetProfilesByIdsQuery,
+  useGetProfilesByNameQuery,
   useUpdateProfileByIdMutation,
 } = profilesApi;
 
