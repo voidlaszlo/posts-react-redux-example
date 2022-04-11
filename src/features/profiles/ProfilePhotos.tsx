@@ -1,7 +1,7 @@
-import User from "../../models/User";
+import Profile from "../../models/Profile";
 
 interface Props {
-  profile: User;
+  profile: Profile;
   isSelf: boolean;
 }
 

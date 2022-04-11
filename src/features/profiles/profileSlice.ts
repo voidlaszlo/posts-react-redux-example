@@ -1,27 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
-import User from "../../models/User";
+import Profile from "../../models/Profile";
 
-interface UserState {
-  user: User | null;
+interface ProfileState {
+  profile: Profile | null;
 }
 
-const initialState: UserState = {
-  user: null,
+const initialState: ProfileState = {
+  profile: null,
 };
 
-export const userSlice = createSlice({
-  name: "user",
+export const profileSlice = createSlice({
+  name: "profile",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+    login: (state, action: PayloadAction<Profile>) => {
+      state.profile = action.payload;
     },
     logout: (state) => {
-      state.user = null;
+      state.profile = null;
     },
   },
 });
 
-export const { login, logout } = userSlice.actions;
-export const selectUser = (state: RootState) => state.user.user;
+export const { login, logout } = profileSlice.actions;
+export const selectProfile = (state: RootState) => state.profile.profile;

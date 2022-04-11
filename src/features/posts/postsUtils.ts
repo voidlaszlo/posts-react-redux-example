@@ -15,12 +15,12 @@ export const sortBy = <T>({
   });
 };
 
-export const like = (post: Post, userId: number): Post => {
+export const like = (post: Post, profileId: number): Post => {
   return produce(post, (draft) => {
-    if (!post.likes.includes(userId)) {
-      draft.likes.push(userId);
+    if (!post.likes.includes(profileId)) {
+      draft.likes.push(profileId);
     } else {
-      draft.likes.splice(draft.likes.indexOf(userId), 1);
+      draft.likes.splice(draft.likes.indexOf(profileId), 1);
     }
   });
 };

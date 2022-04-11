@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { usePostMutation } from "../../api/postsApi";
-import { selectUser } from "../profiles/profileSlice";
+import { selectProfile } from "../profiles/profileSlice";
 import { useAppSelector } from "../../hooks/hooks";
 import Post from "../../models/Post";
 
 const NewPost: React.FC = () => {
-  const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfile);
   const [post] = usePostMutation();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -21,15 +21,15 @@ const NewPost: React.FC = () => {
     let date = new Date();
     let dateString = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
 
-    let posty: Partial<Post> = user
+    let posty: Partial<Post> = profile
       ? {
           likes: [],
           replies: 0,
           views: 0,
           author: {
-            name: user.name,
-            imageUrl: user.imageUrl,
-            href: user.href,
+            name: profile.name,
+            imageUrl: profile.imageUrl,
+            href: profile.href,
           },
           date: dateString,
           datetime: date.toISOString(),

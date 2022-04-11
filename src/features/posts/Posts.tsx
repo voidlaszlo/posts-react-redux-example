@@ -10,7 +10,7 @@ import {
 } from "../../constants/constants";
 import { useAppSelector } from "../../hooks/hooks";
 import Post from "../../models/Post";
-import { selectUser } from "../profiles/profileSlice";
+import { selectProfile } from "../profiles/profileSlice";
 import NewPost from "./NewPost";
 import PostCard from "./PostCard";
 import { sortBy } from "./postsUtils";
@@ -19,7 +19,7 @@ import Tabs from "./Tabs";
 const Posts = () => {
   const { data: posts = [] } = useGetPostsQuery();
   const [currentSortType, setCurrentSortType] = useState<string>(tabs[0].name);
-  const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfile);
 
   let postsToShow: Post[] = [];
 
@@ -62,7 +62,7 @@ const Posts = () => {
         <ul className="space-y-4">
           {postsToShow.map((post) => (
             <Fragment key={post.id}>
-              <PostCard post={post} userId={user ? user.id : -1} />
+              <PostCard post={post} profileId={profile ? profile.id : -1} />
             </Fragment>
           ))}
         </ul>

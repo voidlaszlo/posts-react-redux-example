@@ -1,6 +1,6 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useState } from "react";
-import { useLoginQuery } from "../../api/usersApi";
+import { useLoginQuery } from "../../api/profilesApi";
 import { login } from "../profiles/profileSlice";
 import { useAppDispatch } from "../../hooks/hooks";
 
@@ -8,7 +8,7 @@ interface Props {}
 
 const LoginPage: React.FC<Props> = (props: Readonly<Props>) => {
   const [email, setEmail] = useState<string | symbol>(skipToken);
-  const { data: user } = useLoginQuery(email);
+  const { data: profile } = useLoginQuery(email);
   const dispatch = useAppDispatch();
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -16,8 +16,8 @@ const LoginPage: React.FC<Props> = (props: Readonly<Props>) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (user) {
-      dispatch(login(user));
+    if (profile) {
+      dispatch(login(profile));
     }
   };
 

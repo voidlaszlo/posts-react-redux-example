@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/solid";
 import { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logout, selectUser } from "../profiles/profileSlice";
+import { logout, selectProfile } from "../profiles/profileSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const navigation = [
@@ -27,7 +27,7 @@ const navigation = [
 ];
 
 const Header = () => {
-  const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
 
   const onSignOut = () => {
@@ -35,7 +35,7 @@ const Header = () => {
   };
 
   const userNavigation = [
-    { name: "Your Profile", href: `/profiles/${user?.id}` },
+    { name: "Your Profile", href: `/profiles/${profile?.id}` },
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#", onClick: () => onSignOut() },
   ];
@@ -116,7 +116,7 @@ const Header = () => {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={user?.imageUrl}
+                        src={profile?.imageUrl}
                         alt=""
                       />
                     </Menu.Button>
@@ -184,16 +184,16 @@ const Header = () => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src={user?.imageUrl}
+                    src={profile?.imageUrl}
                     alt=""
                   />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-gray-800">
-                    {user?.name}
+                    {profile?.name}
                   </div>
                   <div className="text-sm font-medium text-gray-500">
-                    {user?.fields.Email}
+                    {profile?.fields.Email}
                   </div>
                 </div>
                 <button

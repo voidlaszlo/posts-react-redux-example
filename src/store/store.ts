@@ -1,11 +1,11 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { userSlice } from "../features/profiles/profileSlice";
+import { profileSlice } from "../features/profiles/profileSlice";
 import { api } from "../api/api";
 
 export const store = configureStore({
   reducer: {
-    user: userSlice.reducer,
+    profile: profileSlice.reducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (callback) => callback().concat(api.middleware),

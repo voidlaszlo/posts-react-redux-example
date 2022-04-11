@@ -1,14 +1,14 @@
 import React from "react";
-import { useGetUsersByIdsQuery } from "../../api/usersApi";
-import User from "../../models/User";
+import { useGetProfilesByIdsQuery } from "../../api/profilesApi";
+import Profile from "../../models/Profile";
 
 interface Props {
-  profile: User;
+  profile: Profile;
 }
 
 const FriendsList: React.FC<Props> = (props: Readonly<Props>) => {
   const { profile } = props;
-  const { data: friends } = useGetUsersByIdsQuery(profile?.friends);
+  const { data: friends } = useGetProfilesByIdsQuery(profile?.friends);
 
   return (
     <div className="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">

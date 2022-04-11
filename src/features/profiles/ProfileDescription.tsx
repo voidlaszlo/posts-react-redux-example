@@ -1,8 +1,8 @@
 import React from "react";
-import User, { Fields } from "../../models/User";
+import Profile, { Fields } from "../../models/Profile";
 
 interface Props {
-  profile: User;
+  profile: Profile;
   isSelf: boolean;
 }
 
@@ -38,7 +38,7 @@ const ProfileDescription: React.FC<Props> = (props: Readonly<Props>) => {
 
 ProfileDescription.displayName = "ProfileDescription";
 ProfileDescription.defaultProps = {
-  profile: {} as User,
+  profile: {} as Profile,
   isSelf: false,
 };
 

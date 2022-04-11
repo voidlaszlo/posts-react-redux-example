@@ -13,15 +13,15 @@ import { like } from "./postsUtils";
 
 interface Props {
   post: Post;
-  userId: number;
+  profileId: number;
 }
 
 const PostCard: React.FC<Props> = (props: Readonly<Props>) => {
-  const { post, userId } = props;
+  const { post, profileId } = props;
   const [update] = useUpdateMutation();
 
-  const handleLike = (post: Post, userId: number) => {
-    update(like(post, userId));
+  const handleLike = (post: Post, profileId: number) => {
+    update(like(post, profileId));
   };
 
   return (
@@ -68,13 +68,13 @@ const PostCard: React.FC<Props> = (props: Readonly<Props>) => {
               <span className="inline-flex items-center text-sm">
                 <button
                   type="button"
-                  onClick={() => handleLike(post, userId)}
+                  onClick={() => handleLike(post, profileId)}
                   className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
                 >
                   <ThumbUpIcon
                     //text-rose-500
                     className={`h-5 w-5 ${
-                      post.likes.includes(userId) ? "text-rose-500" : ""
+                      post.likes.includes(profileId) ? "text-rose-500" : ""
                     }`}
                     aria-hidden="true"
                   />

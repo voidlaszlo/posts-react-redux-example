@@ -11,8 +11,8 @@ const postsApi = api.injectEndpoints({
       query: (id) => `/posts/${id}`,
       providesTags: ["Post"],
     }),
-    getPostsByUserId: builder.query<Post[], number | undefined>({
-      query: (id) => `/posts?userId=${id}`,
+    getPostsByProfileId: builder.query<Post[], number | undefined>({
+      query: (id) => `/posts?profileId=${id}`,
       providesTags: ["Post"],
     }),
     post: builder.mutation<Post, Partial<Post>>({
@@ -37,7 +37,7 @@ const postsApi = api.injectEndpoints({
 export const {
   useGetPostsQuery,
   useGetPostByIdQuery,
-  useGetPostsByUserIdQuery,
+  useGetPostsByProfileIdQuery,
   usePostMutation,
   useUpdateMutation,
 } = postsApi;

@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import FriendsList from "./FriendsList";
 import ProfileDescription from "./ProfileDescription";
 import ProfilePhotos from "./ProfilePhotos";
-import { selectUser } from "./profileSlice";
+import { selectProfile } from "./profileSlice";
 import { useAppSelector } from "../../hooks/hooks";
-import { useGetUserByIdQuery } from "../../api/usersApi";
+import { useGetProfileByIdQuery } from "../../api/profilesApi";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -20,9 +20,9 @@ const tabs = [
 const ProfilePage = () => {
   let { id } = useParams();
   const [currentTab, setCurrentTab] = useState("Profile");
-  const self = useAppSelector(selectUser);
+  const self = useAppSelector(selectProfile);
   const [isSelf, setIsSelf] = useState(false);
-  const { data: profile } = useGetUserByIdQuery(Number(id));
+  const { data: profile } = useGetProfileByIdQuery(Number(id));
 
   useEffect(() => {
     if (id === self?.id) {
